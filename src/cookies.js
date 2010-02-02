@@ -43,7 +43,7 @@
      * does not exist.
      */
     get: function get(name) {
-      return has(name) ? list()[name] : null;
+      return Cookie.has(name) ? Cookie.list()[name] : null;
     },
     
     /**
@@ -53,7 +53,7 @@
      * Returns whether the cookie for that name exists or not.
      */
     has: function has(name) {
-      return new RegExp(";\\s*" + encodeURIComponent(name) + '=').test(document.cookie);
+      return new RegExp("(?:;\\s*|^)" + encodeURIComponent(name) + '=').test(document.cookie);
     },
     
     /**
@@ -71,7 +71,7 @@
         if (!isRegExp(nameRegExp) || nameRegExp.test(pair[0]))
           result[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
       }
-      return pairs;
+      return result;
     },
     
     /**
@@ -117,6 +117,7 @@
      *   used as `Boolean`-equivalent (so zero, `null`, `undefined` and the empty string are all false).
      */
     set: function set(name, value, options) {
+      options = options || {};
       var def = [encodeURIComponent(name) + '=' + encodeURIComponent(value)];
       if (options.path) def.push('path=' + options.path);
       if (options.domain) def.push('domain=' + options.path);
@@ -141,7 +142,7 @@
       var key = '70ab3d396b85e670f25b93be05e027e4eb655b71', value = 'Élodie Jaubert'
       Cookie.remove(key);
       Cookie.set(key, value);
-      var result = value = Cookie.get(key);
+      var result = value == Cookie.get(key);
       Cookie.remove(key);
       return result;
     },
