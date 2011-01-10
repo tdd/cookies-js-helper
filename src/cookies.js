@@ -128,7 +128,7 @@
       var expires = isDate(options.expires) ? options.expires.toUTCString() : options.expires;
       if (expires) def.push('expires=' + expires);
       if (options.secure) def.push('secure');
-      def = def.join('; ');
+      def = def.join(';');
       document.cookie = def;
       return def;
     },
@@ -139,13 +139,13 @@
      * Tests whether cookies are enabled or not.
      */
     test: function test() {
-      var key = '70ab3d396b85e670f25b93be05e027e4eb655b71', value = 'Élodie Jaubert'
+      var key = '70ab3d396b85e670f25b93be05e027e4eb655b71', value = 'Élodie Jaubert';
       Cookie.remove(key);
       Cookie.set(key, value);
       var result = value == Cookie.get(key);
       Cookie.remove(key);
       return result;
-    },
+    }
   };
   scope.Cookie = Cookie;
 })(window);
