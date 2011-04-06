@@ -68,6 +68,7 @@
       var pairs = document.cookie.split(';'), pair, result = {};
       for (var index = 0, len = pairs.length; index < len; ++index) {
         pair = pairs[index].split('=');
+        pair[0] = pair[0].replace(/^\s+|\s+$/, '');
         if (!isRegExp(nameRegExp) || nameRegExp.test(pair[0]))
           result[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
       }
@@ -84,7 +85,7 @@
      */
     remove: function remove(name, options) {
       var opt2 = {};
-      for (var key in (options || {})) opts2[key] = options[key];
+      for (var key in (options || {})) opt2[key] = options[key];
       opt2.expires = new Date(0);
       opt2.maxAge = -1;
       return Cookie.set(name, null, opt2);
