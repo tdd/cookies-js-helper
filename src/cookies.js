@@ -121,7 +121,7 @@
       options = options || {};
       var def = [encodeURIComponent(name) + '=' + encodeURIComponent(value)];
       if (options.path) def.push('path=' + options.path);
-      if (options.domain) def.push('domain=' + options.path);
+      if (options.domain) def.push('domain=' + options.domain);
       var maxAge = 'maxAge' in options ? options.maxAge :
         ('max_age' in options ? options.max_age : options['max-age']), maxAgeNbr;
       if ('undefined' != typeof maxAge && 'null' != typeof maxAge && (!isNaN(maxAgeNbr = parseFloat(maxAge))))
